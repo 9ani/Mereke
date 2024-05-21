@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Создать Мероприятие</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <div class="container">
+        <div class="newEvent"> 
+            <form action="/api/events/new" method="POST" class="form" enctype="multipart/form-data">
+                <h3>Новое Мероприятие</h3>
+                
+                <fieldset class="fieldset">
+                    <input type="text" name="title" id="title" placeholder="Введите название мероприятия" required>
+                </fieldset>
+                
+                <fieldset class="fieldset">
+                    <textarea name="description" id="description" placeholder="Введите описание мероприятия" cols="30" rows="10" required></textarea>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <input type="date" name="date" id="date" required>
+                </fieldset>
+                
+                <fieldset class="fieldset">
+                    <input type="time" name="time" id="time">
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <input type="text" name="location" id="location" placeholder="Введите место проведения" required>
+                </fieldset>
+                
+                <fieldset class="fieldset">
+                    <input type="number" name="availableSeats" id="availableSeats" placeholder="Введите количество доступных мест" required>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <select name="category" id="category" required>
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category._id %>"><%= category.name %></option>
+                        <% }) %>
+                    </select>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <label for="image">Добавьте изображение мероприятия</label>
+                    <input type="file" name="image" id="image">
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <button type="submit">Создать</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <%- include('./partials/scripts.ejs') %>
+</body>
+</html>

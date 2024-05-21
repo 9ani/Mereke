@@ -1,0 +1,70 @@
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 200px;
+}
+
+.logo{
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+.logo a{ 
+    color: #00A2DC;
+    text-decoration: none;
+
+}
+.head-search{
+    display: flex;
+
+}
+.head-search input{
+    border-radius: 4px 0px 0px 4px;
+border: 1px solid #E7E7E7;
+background: #FFF;
+width: 321px;
+height: 50px;
+flex-shrink: 0;
+color: rgba(0, 0, 0, 0.54);
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 46px;
+padding-left: 20px;
+box-sizing: border-box;
+}
+
+.head-search button{
+    color: #FFF;
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 46px; 
+border-radius: 0px 4px 4px 0px;
+background: #00A2DC;
+border: none;
+}
+.auth_buttons{
+display: flex;
+gap: 20px;
+
+
+}
+.auth_buttons a{
+    border-radius: 4px;
+background: #00A2DC;
+text-decoration: none;
+padding: 20px;
+color: white;
+}
+#mini{
+    width: 40%;
+    margin-left: 100px;
+    position: relative;
+}
+.mini{
+    width: 10%;
+}

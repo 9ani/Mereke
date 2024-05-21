@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Login</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+<body>
+    <div class="container"> 
+        <form action="/api/signin" method="POST" class="form">
+            <h3>Login</h3>
+            <fieldset class="fieldset">
+                <input type="email" name="email" id="" placeholder="Enter email">
+            </fieldset>
+            <fieldset class="fieldset">
+                <input type="password" name="password" id="" placeholder="Enter password">
+            </fieldset>
+            <fieldset class="fieldset">
+                <button type="submit">Login</button>
+            </fieldset>
+        </form>
+    </div>
+    <%- include("partials/scripts.ejs") %>
+
+</body>
+</html>

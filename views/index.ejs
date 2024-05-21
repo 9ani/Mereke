@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <div class="container">
+        <div class="main">
+            <div class="main-content">
+                <div class="intro">
+                    <div class="intro2">
+                        <% if (user._id && user.isAdmin) { %>
+                            <h2>Все блоги</h2>
+                            <a href="/new">Новое Мероприятие</a> 
+                        <% } else { %>
+                            <h2 id="blog_title">Блоги по программированию</h2>
+                        <% } %>
+                    </div>
+
+                    <p>Популярные и лучшие публикации по программированию для начинающих
+                        и профессиональных программистов и IT-специалистов.</p>
+                    
+                </div>
+                <% events.forEach(item => { %>   
+                    <div class="blog_img">
+                        <img src="<%= item.image %>" alt="" srcset="">
+                    </div>
+                    
+                    <div class="blog_info">
+                        <div class="blog_info2">
+                            <h3><a href="/detail/<%= item._id %>"><%= item.title %></a></h3>
+                            <% if (item && item.author && user && user._id && user._id.toString() === item.author._id.toString()) { %>
+                                <div class="modal_window">
+                                    <i class="fa-solid fa-ellipsis-vertical ellipsis"></i>
+                                    <div class="modal_content">
+                                        <a href="/edit/<%=item._id%>"><button id="edit" class="edit_button">Редактировать</button></a>
+                                        <a onclick="console.log('Delete button clicked'); deleteBlogs('<%= item._id %>')" class="delete_link"><button class="delete_button">Удалить</button></a>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                        <p><a href="/detail/<%= item._id %>"><%= item.description %></a></p>
+
+                        <div class="blog_icons">
+                            <div class="blog_icon"><img src="./images/icons/date.svg" alt="" srcset=""><%= item.time %></div>
+                            <div class="blog_icon"><img src="./images/icons/visibility.svg" alt="" srcset=""><%= item.viewsCount %></div>
+                            <div class="blog_icon"><img src="./images/icons/message.svg" alt="" srcset=""><%= item.commentsCount %></div>
+                            <div class="blog_icon"><img src="./images/icons/forums.svg" alt="" srcset=""><%= item.category.name %></div>
+                            <div class="blog_icon"><img src="./images/icons/person.svg" alt="" srcset=""><%= item.author?.full_name %></div>
+                        </div>
+                    </div>
+                <% }) %>
+
+                <div class="pages">
+                    <% let localsString = '' %>
+                    <% if (locals.category) { localsString = 'category=' + locals.category + '&' } %>
+                    <% if (locals.search) { localsString = 'search=' + locals.search + '&' } %>
+                    <% for (let i = 0; i < pages; i++) { %>
+                        <a href="?<%= localsString %>page=<%= i %>"><%= i + 1 %></a>
+                    <% } %>
+                </div>
+            </div>
+            <div class="categories">
+                    <!-- <div class="mini-profile">
+                        <img src="/images/icons/profile-img.png" alt="" srcset="">
+                        <h2><%= user.full_name %></h2>
+                        <p><%= user.about %></p>
+                        <a id="profile" href="/profile/<%= user._id  %>">Редактировать</a>
+                    </div> -->
+                    <h3>Категории</h3>
+                    <% categories.forEach(category => { %>
+                        <a href="?category=<%= category.key %>"><%= category.name %></a>
+                    <% }) %>
+            </div>
+        </div>
+        
+    </div>
+    <%- include("partials/scripts.ejs") %>
+</body>
+</html>

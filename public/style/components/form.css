@@ -1,0 +1,57 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    margin-top: 100px;
+
+}
+
+.form h3{
+    color: #000;
+font-size: 36px;
+font-style: normal;
+font-weight: 500;
+line-height: 46px; 
+margin-bottom: 30px;
+}
+
+.form fieldset{
+    display: flex;
+    flex-direction: column ;
+    margin-bottom: 30px;
+    width: 30%;
+    
+}
+
+
+.fieldset input{
+    border-radius: 4px;
+    border: 1px solid #E7E7E7;
+    background: #FFF;
+    width: 100%;
+    padding: 15px 20px;
+    box-sizing: border-box;
+
+
+
+}
+
+.fieldset button{
+    color: #FFF;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 46px; 
+    border-radius: 0px 4px 4px 0px;
+    background: #00A2DC;
+    border: none;
+    width: 100%;
+    
+}
+
+#description{
+    padding-bottom: 100px;
+
+}

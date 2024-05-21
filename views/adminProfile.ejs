@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Admin Profile - Manage Events</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <div class="container">
+        <div class="main">
+            <div class="main-content">
+                <h3>Профиль</h3>
+                <div class="profile">
+                    <div class="profile-img">
+                        <img src="/images/profile-img.webp" alt="Profile Image">
+                    </div>
+                    <div class="profile-info"> 
+                        <p><span>Полное имя: </span><%= user.full_name %></p>
+                        <p><span>E-mail: </span><%= user.email %></p>
+                        
+                    </div>
+                </div>
+               
+                <h3>Мероприятия</h3>
+                <a href="/new-event" class="add-btn">Добавить мероприятие</a>
+
+                <% events.forEach(item => { %>
+                    <div class="main-card">
+                        <div class="card-left">
+                            <div class="event-img">
+                                <img src="<%= item.image %>" alt="Event Image">
+                            </div>
+                            <div class="event-info">
+                                <a href="/event/<%= item._id %>"><%= item.title %></a>
+                                <p><%= item.description %></p>
+                                <p>Дата: <%= item.date.toDateString() %>, Время: <%= item.time %></p>
+                                <p>Место: <%= item.location %></p>
+                                <p>Доступные места: <%= item.availableSeats %></p>
+                                <p>Категория: <%= item.category.name %></p>
+                            </div>
+                        </div>
+                        <div class="card-right">
+                            <div class="event-btns">
+                                <a href="/edit-event/<%= item._id %>">Редактировать</a>
+                                <a href="javascript:void(0);" onclick="deleteEvent('<%= item._id %>')">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            <div class="categories">
+                <h3>Категории</h3>
+                <% categories.forEach(category => { %>
+                    <a href="/<%= category.key %>"><%= category.name %></a>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include('./partials/scripts.ejs') %>
+
+    <script>
+        async function deleteEvent(eventId) {
+            if (confirm('Вы уверены, что хотите удалить это мероприятие?')) {
+                try {
+                    const response = await fetch(`/api/events/${eventId}`, {
+                        method: 'DELETE',
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        window.location.reload();
+                    } else {
+                        alert('Ошибка при удалении мероприятия');
+                    }
+                } catch (error) {
+                    console.error('Ошибка:', error);
+                    alert('Ошибка при удалении мероприятия');
+                }
+            }
+        }
+    </script>
+</body>
+</html>

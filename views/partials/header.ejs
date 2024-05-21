@@ -1,0 +1,32 @@
+<header>
+    <div class="logo"><a href="/">Decode Blog</a></div>
+    <form class="head-search">
+        <input type="text" id="blogSearchInput" name="search" placeholder="Поиск по блогам">
+        <button >
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Найти
+        </button>
+    </form>
+        <% if (user._id && !user.isAdmin) { %>
+            <div class="auth_buttons">
+
+            <a href="/profile/<%= user._id  %>">profile</a>
+            <a href="/api/signout" >Logout</a></div>
+
+            </div>
+        <% } else if (user._id && user.isAdmin) { %>
+            <div class="auth_buttons">
+            <a href="/admin/<%= user._id  %>">Profile</a>
+            <a href="/api/signout">Logout</a>
+            </div>
+        <% } else { %>
+            <div class="auth_buttons">
+
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+            </div>
+        <% } %>
+
+
+</header>
+

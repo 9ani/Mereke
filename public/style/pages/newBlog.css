@@ -1,0 +1,15 @@
+.newBlog{
+    background-color: #fff;
+    padding: 50px 100px 100px 100px;
+    width: 100%;
+    
+    box-sizing: border-box;
+}
+.newBlog form{
+    margin-right: 40%;
+}
+.newBlog .fieldset{
+    width: 110%;
+    
+    
+}

@@ -1,0 +1,93 @@
+.logout-btn{
+    position: absolute;
+    left: 38%;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 46px; 
+    border-radius: 0px 4px 4px 0px;
+    background: #00A2DC;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 24%;
+    text-align: center;
+}
+
+.logout-btn a{
+    text-decoration: none;
+    color: white;
+}
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.main-card {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 100%;
+}
+
+.card-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 70%;
+}
+
+.event-img img {
+    max-width: 150px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.event-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-info a {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.event-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.card-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    align-items: flex-end;
+}
+
+.event-btns a {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.event-btns a:hover {
+    background-color: #0056b3;
+}

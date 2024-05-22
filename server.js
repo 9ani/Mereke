@@ -33,6 +33,8 @@ app.use(require('./server/pages/router'))
 app.use(require('./server/Categories/router'))
 app.use(require('./server/auth/router'))
 app.use(require('./server/Events/router'))
+app.use(require('./server/Rates/router'))
+
 
 
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../auth/User");
 const Event = require("../Events/Event");
 const Categories = require("../Categories/Categories");
+const Rate = require('../Rates/Rates')
 
 router.get("/", async (req, res) => {
   const options = {};
@@ -81,36 +82,28 @@ router.get("/new-event", async (req, res) => {
   });
 });
 router.get("/edit/:id", async (req, res) => {
-  const allGenres = await Genres.find();
-  const allCountries = await Country.find();
-  const film = await Film.findById(req.params.id);
+  const allCategories = await Categories.find();
+  const event = await Event.findById(req.params.id);
 
   res.render("editevent", {
-    genres: allGenres,
-    countries: allCountries,
+    categories: allCategories,
     user: req.user ? req.user : {},
-    film,
+    event,
   });
 });
 router.get("/not-found", (req, res) => {
   res.render("notfound");
 });
 
-router.get("/detail/:id", async (req, res) => {
-  const rates = await Rate.find({ filmId: req.params.id }).populate("authorId");
+router.get('/detail/:id', async(req, res)=>{
+  const rates = await Rate.find({eventId: req.params.id}).populate('authorId')
   let averageRate = 0;
-  for (let i = 0; i < rates.length; i++) {
-    averageRate += rates[i].rate;
+  for(let i = 0; i < rates.length; i++ ){
+      averageRate+= rates[i].rate
   }
-  const film = await Film.findById(req.params.id)
-    .populate("country")
-    .populate("genre");
-  res.render("detail", {
-    user: req.user ? req.user : {},
-    film: film,
-    rates: rates,
-    averageRate: (averageRate / rates.length).toFixed(1),
-  });
-});
+  const event = await Event.findById(req.params.id).populate('category')
+  res.render("detail", {user: req.user ? req.user : {}, event: event, rates: rates, averageRate: (averageRate / rates.length).toFixed(1)})
+})
+
 
 module.exports = router;

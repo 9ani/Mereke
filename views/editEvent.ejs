@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>Edit Event</title>
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+
+    <div class="container"> 
+        <div class="editEvent"> 
+
+            <form action="/api/events/edit" method="POST" class="form" enctype="multipart/form-data">
+                <h3>Редактирование мероприятия</h3>
+                <fieldset>
+                    <input type="hidden" value="<%= event._id %>" name="id">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="title">Название мероприятия</label>
+                    <input type="text" name="title" id="title" value="<%= event.title %>" placeholder="Введите название мероприятия">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="category">Категория</label>
+                    <select name="category" id="category">
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category._id %>"<%= event.category && event.category._id.toString() === category._id.toString() ? ' selected' : '' %>><%= category.name %></option>
+                        <% }) %>
+                    </select>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="image">Изображение мероприятия</label>
+                    <input type="file" name="image" id="image">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="description">Описание мероприятия</label>
+                    <textarea name="description" id="description" placeholder="Введите описание мероприятия" cols="30" rows="10"><%= event.description %></textarea>
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="time">Время проведения</label>
+                    <input type="time" name="time" id="time" value="<%= event.time %>" placeholder="Введите время мероприятия">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="date">Дата проведения</label>
+                    <input type="date" name="date" id="date" value="<%= event.date.toISOString().split('T')[0] %>" placeholder="Введите дату мероприятия">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="location">Место проведения</label>
+                    <input type="text" name="location" id="location" value="<%= event.location %>" placeholder="Введите место проведения">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <label for="availableSeats">Доступные места</label>
+                    <input type="number" name="availableSeats" id="availableSeats" value="<%= event.availableSeats %>" placeholder="Введите количество доступных мест">
+                </fieldset>
+                <fieldset class="fieldset">
+                    <button type="submit">Обновить</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <%- include("partials/scripts.ejs") %>
+
+</body>
+</html>

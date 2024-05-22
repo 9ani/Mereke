@@ -42,8 +42,9 @@
                         </div>
                         <div class="card-right">
                             <div class="event-btns">
-                                <a href="/edit-event/<%= item._id %>">Редактировать</a>
+                                <a href="/edit/<%= item._id %>">Редактировать</a>
                                 <a href="javascript:void(0);" onclick="deleteEvent('<%= item._id %>')">Удалить</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -52,32 +53,13 @@
             <div class="categories">
                 <h3>Категории</h3>
                 <% categories.forEach(category => { %>
-                    <a href="/<%= category.key %>"><%= category.name %></a>
-                <% }) %>
+                    <a href="?category=<%= category.key %>"><%= category.name %></a>
+                    <% }) %>
             </div>
         </div>
     </div>
     <%- include('./partials/scripts.ejs') %>
 
-    <script>
-        async function deleteEvent(eventId) {
-            if (confirm('Вы уверены, что хотите удалить это мероприятие?')) {
-                try {
-                    const response = await fetch(`/api/events/${eventId}`, {
-                        method: 'DELETE',
-                    });
-                    const result = await response.json();
-                    if (result.success) {
-                        window.location.reload();
-                    } else {
-                        alert('Ошибка при удалении мероприятия');
-                    }
-                } catch (error) {
-                    console.error('Ошибка:', error);
-                    alert('Ошибка при удалении мероприятия');
-                }
-            }
-        }
-    </script>
+    
 </body>
 </html>

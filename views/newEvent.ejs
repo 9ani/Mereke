@@ -3,40 +3,48 @@
 <head>
     <%- include('./partials/head.ejs') %>
     <title>Создать Мероприятие</title>
+    <link rel="stylesheet" href="/styles/newEvent.css">
 </head>
 <body>
     <%- include('./partials/header.ejs') %>
 
-    <div class="container">
+    <div class="container7">
         <div class="newEvent"> 
             <form action="/api/events/new" method="POST" class="form" enctype="multipart/form-data">
                 <h3>Новое Мероприятие</h3>
                 
                 <fieldset class="fieldset">
+                    <label for="title">Название мероприятия</label>
                     <input type="text" name="title" id="title" placeholder="Введите название мероприятия" required>
                 </fieldset>
                 
                 <fieldset class="fieldset">
+                    <label for="description">Описание мероприятия</label>
                     <textarea name="description" id="description" placeholder="Введите описание мероприятия" cols="30" rows="10" required></textarea>
                 </fieldset>
 
                 <fieldset class="fieldset">
+                    <label for="date">Дата проведения</label>
                     <input type="date" name="date" id="date" required>
                 </fieldset>
                 
                 <fieldset class="fieldset">
+                    <label for="time">Время проведения</label>
                     <input type="time" name="time" id="time">
                 </fieldset>
 
                 <fieldset class="fieldset">
+                    <label for="location">Место проведения</label>
                     <input type="text" name="location" id="location" placeholder="Введите место проведения" required>
                 </fieldset>
                 
                 <fieldset class="fieldset">
+                    <label for="availableSeats">Доступные места</label>
                     <input type="number" name="availableSeats" id="availableSeats" placeholder="Введите количество доступных мест" required>
                 </fieldset>
 
                 <fieldset class="fieldset">
+                    <label for="category">Категория мероприятия</label>
                     <select name="category" id="category" required>
                         <% categories.forEach(category => { %>
                             <option value="<%= category._id %>"><%= category.name %></option>

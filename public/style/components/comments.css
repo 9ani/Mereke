@@ -1,33 +1,40 @@
-.comments h3{
+.comments h3 {
     font-size: 20px;
     font-weight: 700;
 }
-
-.comment-stars{
+.comments{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+.comment-stars {
     display: flex;
     gap: 10px;
 }
-.comment-stars img{
+
+.comment-stars img {
     width: 30px;
-    filter: grayscale(1005);
+    filter: grayscale(100%);
     z-index: 0;
 }
-.add-comment-form{
-    margin-top: 30px;   
+
+.add-comment-form {
+    margin-top: 30px;
 }
 
-.add-comment-form textarea{
+.add-comment-form textarea {
     width: 100%;
     resize: none;
     height: 100px;
     margin-top: 10px;
 }
-.add-comment-form button{
+
+.add-comment-form button {
     margin-top: 20px;
     width: 200px;
     padding: 15px 20px;
     border: none;
-    background: linear-gradient(90deg,#ff5c4d,#eb469f 26.56%,#8341ef 75%,#3f68f9);
+    background: #ff1111;
     color: #fff;
     font-size: 16px;
     font-weight: 600;
@@ -35,29 +42,32 @@
     cursor: pointer;
 }
 
-.add-comment-form p{
+.add-comment-form p {
     margin: 10px 0;
 }
 
-.comments>p{
+.comments > p {
     margin-top: 20px;
 }
 
-.active-star{
+.active-star {
+    filter: grayscale(0%) !important;
+}
+.active-star2 {
     filter: grayscale(0%) !important;
 }
 
-.comment{
+.comment {
     margin: 20px 0;
     border: 1px solid #00000039;
     border-radius: 10px;
     padding: 15px;
 }
 
-.comment a{
+.comment a {
     text-decoration: none;
 }
 
-.comment p{
+.comment p {
     margin: 15px 0;
 }

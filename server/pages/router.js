@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require("../auth/User");
 const Event = require("../Events/Event");
 const Categories = require("../Categories/Categories");
-const Rate = require('../Rates/Rates')
+const Rate = require("../Rates/Rates");
 
 router.get("/", async (req, res) => {
   const options = {};
@@ -34,15 +34,22 @@ router.get("/", async (req, res) => {
     .limit(limit)
     .populate("category");
   const user = req.user ? await User.findById(req.user._id) : {};
-
+  const formattedEvents = events.map((event) => {
+    event.formattedDate = formatDate(event.date);
+    return event;
+  });
   res.render("index", {
     categories: allCategories,
     user,
-    events,
+    events: formattedEvents,
     pages: Math.ceil(totalEvents / limit),
   });
 });
-
+function formatDate(dateString) {
+  const options = { day: "2-digit", month: "long", year: "numeric" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", options);
+}
 router.get("/login", (req, res) => {
   res.render("login", { user: req.user ? req.user : {} });
 });
@@ -51,19 +58,18 @@ router.get("/register", (req, res) => {
 });
 
 router.get("/profile/:id", async (req, res) => {
-    const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id);
 
-    if (user) {
-        res.render("profile", { user: user , loginUser: req.user});
-    } else {
-        res.redirect('/not-found');
-    }
+  if (user) {
+    res.render("profile", { user: user, loginUser: req.user });
+  } else {
+    res.redirect("/not-found");
+  }
 });
 router.get("/admin/:id", async (req, res) => {
-    const allCategories = await Categories.find();
-    const user = await User.findById(req.params.id);
-  const events = await Event.find()
-    .populate("category");
+  const allCategories = await Categories.find();
+  const user = await User.findById(req.params.id);
+  const events = await Event.find().populate("category");
 
   res.render("adminProfile", {
     categories: allCategories,
@@ -95,23 +101,29 @@ router.get("/not-found", (req, res) => {
   res.render("notfound");
 });
 
-router.get('/detail/:id', async(req, res)=>{
-  const rates = await Rate.find({eventId: req.params.id}).populate('authorId')
+router.get("/detail/:id", async (req, res) => {
+  const rates = await Rate.find({ eventId: req.params.id }).populate(
+    "authorId"
+  );
   let averageRate = 0;
-  for(let i = 0; i < rates.length; i++ ){
-      averageRate+= rates[i].rate
+  for (let i = 0; i < rates.length; i++) {
+    averageRate += rates[i].rate;
   }
-  const event = await Event.findById(req.params.id).populate('category')
-  res.render("detail", {user: req.user ? req.user : {}, event: event, rates: rates, averageRate: (averageRate / rates.length).toFixed(1)})
-})
-router.get('/bookings', async (req, res) => {
- 
+  const event = await Event.findById(req.params.id).populate("category");
+  res.render("detail", {
+    user: req.user ? req.user : {},
+    event: event,
+    rates: rates,
+    averageRate: (averageRate / rates.length).toFixed(1),
+  });
+});
+router.get("/bookings", async (req, res) => {
   try {
-      const user = await User.findById(req.user._id).populate('bookings');
-      res.render('bookings', { user });
+    const user = await User.findById(req.user._id).populate("bookings");
+    res.render("bookings", { user });
   } catch (err) {
-      console.error(err);
-      res.status(500).send("Server Error");
+    console.error(err);
+    res.status(500).send("Server Error");
   }
 });
 

@@ -31,7 +31,7 @@ function addEventsToCalendar(bookings) {
     const event = {
       id: booking._id,
       calendarId: '1',
-      title: `${booking.title} - ${booking.location}`,
+      title: `${booking.title} -  ${booking.location}`,
       category: 'time',
       start: `${booking.date.split('T')[0]}T${booking.time}`,
       end: `${booking.date.split('T')[0]}T${booking.time}`,

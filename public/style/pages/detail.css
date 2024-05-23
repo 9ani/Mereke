@@ -1,4 +1,4 @@
-.container {
+.event-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -6,39 +6,48 @@
     padding: 20px;
 }
 
-.main {
+.event-main {
     flex: 0 1 70%;
     padding: 20px;
 }
 
-.main-content {
+.event-main-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
+    border: 1px solid;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.intro {
+.event-intro {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 1500px;
+    max-width: 100%;
 }
 
-.event_img img {
+.event-image img {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     height: auto;
     border-radius: 8px;
     margin: 0 auto;
 }
 
-.event_icons {
+.event-icons {
+    
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 60px;
     margin-top: 20px;
+    justify-content: center;
 }
 
-.event_icon {
+.event-icon {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -46,159 +55,51 @@
     color: #555;
 }
 
-.event_icon img {
+.event-icon img {
     width: 24px;
     height: 24px;
 }
 
-.event_info {
-    margin-top: 30px;
+.event-info1 {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 70px;
+    height: 300px;
 }
 
-.event_info h3 {
-    font-size: 28px;
+.event-info2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.event-info1 button {
+    font-family: Roboto;
+    font-size: 16px;
+
+    margin-top: 20px;
+    width: 200px;
+    padding: 15px 20px;
+    border: none;
+    background: #ff1111;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 7px;
+}
+
+.event-info-title h3 {
+    font-weight: 1000;
+    font-size: 40px;
     margin-bottom: 20px;
 }
 
-.event_info p {
+.event-info p {
     font-size: 16px;
     line-height: 1.5;
     color: #333;
-}
-
-.modal_window {
-    position: relative;
-    display: inline-block;
-}
-
-.ellipsis {
-    cursor: pointer;
-}
-
-.modal_content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 1;
-    border-radius: 4px;
-}
-
-.modal_window:hover .modal_content {
-    display: block;
-}
-
-.edit_button,
-.delete_button {
-    background-color: #00A2DC;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px 0;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.delete_button {
-    background-color: #DC3545;
-}
-
-.comments {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-}
-
-.comment {
-    margin-top: 40px;
-    padding-bottom: 50px;
-    border-bottom: 1px solid rgb(212, 212, 212);
-}
-
-.comment-head {
-    display: flex;
-    align-items: center;
-    width: 30%;
-    margin-bottom: 40px;
-}
-
-.comment-head img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.comment-head p {
-    font-size: 24px;
-    font-weight: 500;
-    margin-left: 20px;
-}
-
-.add-comment-form {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.add-comment-form p {
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.add-comment-form .comment-stars {
-    display: flex;
-    gap: 5px;
-}
-
-.add-comment-form .comment-stars img {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-
-.add-comment-form button {
-    color: #FFF;
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 46px;
-    border-radius: 4px;
-    background: #00A2DC;
-    border: none;
-    width: 20%;
-}
-
-.add-comment-form textarea {
-    padding: 20px;
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.comment-unauthorized {
-    background-color: #FFF3CD;
-    padding: 30px 50px;
-}
-
-.comment-unauthorized a {
-    color: #00A2DC;
-}
-
-.comment .comment-stars {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.comment .comment-stars img {
-    width: 24px;
-    height: 24px;
-}
-
-.comment .comment-stars .active-star {
-    filter: brightness(1.5);
 }

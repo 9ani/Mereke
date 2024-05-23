@@ -3,31 +3,47 @@
 <head>
     <%- include('./partials/head.ejs') %>
     <title>My Bookings</title>
-    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
 </head>
 <body>
     <%- include('./partials/header.ejs') %>
     <div class="container">
-        <div class="main">
-            <h1>My Bookings</h1>
-            <% if (user.bookings && user.bookings.length > 0) { %>
-                <ul>
-                    <% user.bookings.forEach(booking => { %>
-                        <li>
-                            <h2><%= booking.title %></h2>
-                            <p>Date: <%= booking.date.toDateString() %></p>
-                            <p>Time: <%= booking.time %></p>
-                            <p>Location: <%= booking.location %></p>
-                            <button onclick="deleteBooking('<%= booking._id %>')">Delete Booking</button>
-                        </li>
-                    <% }) %>
-                </ul>
-            <% } else { %>
-                <p>You do not have any bookings.</p>
-            <% } %>
+        <div class="main-book">
+            <div class="main-book-data"><h1>Mои бронирования</h1>
+                <% if (user.bookings && user.bookings.length > 0) { %>
+                    <ul>
+                        <% user.bookings.forEach(booking => { %>
+                            <li>
+                                <h2><%= booking.title %></h2>
+                                <div class="booking-details">
+                                    <div class="booking-detail">
+                                        <img src="/images/icons/time.svg" alt="Time Icon" class="icon">
+                                        <p><%= booking.time %></p>
+                                    </div>
+                                    <div class="booking-detail">
+                                        <img src="/images/icons/date.svg" alt="Date Icon" class="icon">
+                                        <p><%= booking.date.toDateString() %></p>
+                                    </div>
+                                    <div class="booking-detail">
+                                        <img src="/images/icons/location.svg" alt="Location Icon" class="icon">
+                                        <p><%= booking.location %></p>
+                                    </div>
+                                </div>
+                                <button onclick="deleteBooking('<%= booking._id %>')">Delete Booking</button>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>You do not have any bookings.</p>
+                <% } %></div>
+                <div class="main-book-calendar">
+                    <div id="calendar" ></div>
+
+                </div>
+            
+
         </div>
+
     </div>
-    <div id="calendar" style="height: 600px;"></div>
     <%- include("partials/scripts.ejs") %>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>

@@ -7,103 +7,108 @@
 <body>
     <%- include('./partials/header.ejs') %>
 
-    <div class="container">
-        <div class="main">
-            <div class="main-content">
-                <div class="intro">
-                    <div class="event_img">
-                        <img src="<%= event.image %>" alt="Event Image" srcset="">
+    <div class="event-container">
+        <div class="event-main">
+            <div class="event-main-content">
+                <div class="event-intro">
+                    <div class="event-image">
+                        <img src="<%= event.image %>" alt="Event Image">
                     </div>
-                    <div class="event_icons">
-                        <div class="event_icon">
-                            <img src="/images/icons/date.svg" alt="Date Icon" srcset="">
+                    <div class="event-icons">
+                        <div class="event-icon">
+                            <img src="/images/icons/date.svg" alt="Date Icon">
                             <%= event.date.toDateString() %>
                         </div>
-                        <div class="event_icon">
-                            <img src="/images/icons/time.svg" alt="Time Icon" srcset="">
+                        <div class="event-icon">
+                            <img src="/images/icons/time.svg" alt="Time Icon">
                             <%= event.time %>
                         </div>
-                        <div class="event_icon">
-                            <img src="/images/icons/location.svg" alt="Location Icon" srcset="">
+                        <div class="event-icon">
+                            <img src="/images/icons/location.svg" alt="Location Icon">
                             <%= event.location %>
                         </div>
-                        <div class="event_icon">
-                            <img src="/images/icons/seats.svg" alt="Seats Icon" srcset="">
-                            <%= event.availableSeats %>
+                        <div class="event-icon">
+                            <img src="/images/icons/seats.svg" alt="Seats Icon">
+                            <% if(event.availableSeats <= 0){ %>
+                                Мест нет
+                            <% }else{ %>
+                                <%= event.availableSeats %>
+                            <% } %>
                         </div>
                     </div>
                     
-                    <div class="event_info">
-                        <div class="event_info2">
+                    <div class="event-info1">
+                        <div class="event-info2">
+                        <div class="event-info-title">
                             <h3><%= event.title %></h3>
-                            
                         </div>
                         <p><%= event.description %></p>
+                        </div>
                         <% if (user && user._id) { %>
-                            <% if (!user.bookings.includes(event._id)) { %>
-                                <button onclick="bookEvent('<%= event._id %>')">Book</button>
+                            <% if (!user.bookings.includes(event._id) && event.availableSeats > 0) { %>
+                                <button onclick="bookEvent('<%= event._id %>')">Забронировать</button>
                             <% } %>
                         <% } %>
+                    
                         
-                        
-                        <div class="comments">
-                            <h3>Комментарий</h3>
-                            <% if(user && user._id) {%>
-                            <form  class="add-comment-form" onsubmit="sendRate(event)">
-                                <p>Оцените фильм</p>
-                                <div class="comment-stars">
-                                    <img onclick="rateEvent(1)" src="/images/icons/star.svg" alt="">
-                                    <img onclick="rateEvent(2)" src="/images/icons/star.svg" alt="">
-                                    <img onclick="rateEvent(3)" src="/images/icons/star.svg" alt="">
-                                    <img onclick="rateEvent(4)" src="/images/icons/star.svg" alt="">
-                                    <img onclick="rateEvent(5)" src="/images/icons/star.svg" alt="">
-                                </div>
-                                <p>Напишите комментарий</p>
-                                <textarea  id="comment-text" cols="30" rows="10"></textarea>
-                                <input type="hidden" value="<%= user._id  %>" id="comment-author">
-                                <input type="hidden" value="<%= event._id  %>" id="comment-event">
-            
-                                <button type="submit">Сохранить</button>
-                            </form>
-                            <% }else { %>
-                                <p>
-                                    <a href="/login">Войдите</a>
-                                    или
-                                    <a href="/register">зарегистрируйтесь</a>,
-                                    чтобы оставить комментарий
-                                </p>
-                            <% } %> 
-                            <% 
-                                if(rates){ 
-                                    rates.forEach(rate =>{    
-                            %>
-                                        <div class="comment">
-                                            <p>Автор: <a href=""><%= rate.authorId.full_name %></a></p>
-                                            <div class="comment-stars">
-                                                <% 
-                                                for(let i =0; i < 5; i++ ){
-                                                    if(i < rate.rate){
-                                                %>
-                                                
-                                                        <img  class="active-star"  src="/images/icons/star.svg" alt="">
-                                                <%
-                                                    }else{
-                                                %>
-                                                        <img  src="/images/icons/star.svg" alt="">
-                                                <%
-                                                    }
+                    </div>
+                    <div class="comments">
+                        <h3>Комментарий</h3>
+                        <% if(user && user._id) {%>
+                        <form  class="add-comment-form" onsubmit="sendRate(event)">
+                            <p>Оцените мероприятие</p>
+                            <div class="comment-stars">
+                                <img onclick="rateEvent(1)" src="/images/icons/star.svg" alt="">
+                                <img onclick="rateEvent(2)" src="/images/icons/star.svg" alt="">
+                                <img onclick="rateEvent(3)" src="/images/icons/star.svg" alt="">
+                                <img onclick="rateEvent(4)" src="/images/icons/star.svg" alt="">
+                                <img onclick="rateEvent(5)" src="/images/icons/star.svg" alt="">
+                            </div>
+                            <p>Напишите комментарий</p>
+                            <textarea  id="comment-text" cols="30" rows="10"></textarea>
+                            <input type="hidden" value="<%= user._id  %>" id="comment-author">
+                            <input type="hidden" value="<%= event._id  %>" id="comment-event">
+        
+                            <button type="submit">Сохранить</button>
+                        </form>
+                        <% }else { %>
+                            <p>
+                                <a href="/login">Войдите</a>
+                                или
+                                <a href="/register">зарегистрируйтесь</a>,
+                                чтобы оставить комментарий
+                            </p>
+                        <% } %> 
+                        <% 
+                            if(rates){ 
+                                rates.forEach(rate =>{    
+                        %>
+                                    <div class="comment">
+                                        <p>Автор: <a href=""><%= rate.authorId.full_name %></a></p>
+                                        <div class="comment-stars">
+                                            <% 
+                                            for(let i =0; i < 5; i++ ){
+                                                if(i < rate.rate){
+                                            %>
+                                            
+                                                    <img  class="active-star2"  src="/images/icons/star.svg" alt="">
+                                            <%
+                                                }else{
+                                            %>
+                                                    <img  src="/images/icons/star.svg" alt="">
+                                            <%
                                                 }
-                                                %>
-                                            </div>
-                                            <% if(rate.text.length > 0){%>
-                                                <p>Комментарий: <%= rate.text %></p>
-                                            <% } %>
+                                            }
+                                            %>
                                         </div>
-                            <% 
-                                    })
-                                } 
-                            %>
-                        </div>
+                                        <% if(rate.text.length > 0){%>
+                                            <p>Комментарий: <%= rate.text %></p>
+                                        <% } %>
+                                    </div>
+                        <% 
+                                })
+                            } 
+                        %>
                     </div>
                 </div>
             </div>

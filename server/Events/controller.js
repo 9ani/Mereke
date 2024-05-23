@@ -164,17 +164,17 @@ const bookEvent = async (req, res) => {
     const eventId = req.body.eventId;
     const event = await Event.findById(eventId);
     if (!event) {
-        return res.status(404).send('Event not found');
+      return res.status(404).send("Event not found");
     }
     if (event.availableSeats <= 0) {
-        return res.status(400).send('No available seats');
+      return res.status(400).send("No available seats");
     }
     event.attendees.push(req.user._id);
     event.availableSeats--;
     await event.save();
     req.user.bookings.push(eventId);
     await req.user.save();
-    
+
     res.status(200).send({
       _id: event._id,
       title: event.title,
@@ -186,62 +186,81 @@ const bookEvent = async (req, res) => {
       category: event.category,
       image: event.image,
       attendees: event.attendees,
-      __v: event.__v
+      __v: event.__v,
     });
   } catch (error) {
-    console.error('Error booking event:', error);
-    res.status(500).send('Internal server error');
+    console.error("Error booking event:", error);
+    res.status(500).send("Internal server error");
   }
 };
 
 const cancelBooking = async (req, res) => {
-  const userId = req.user._id;
-  const eventId = req.body.bookingId;
+  try {
+    const userId = req.user._id;
+    const eventId = req.body.bookingId;
 
-  const user = await User.findById(userId);
-  const event = await Event.findById(eventId);
+    // Find the user and event by their IDs
+    const user = await User.findById(userId);
+    const event = await Event.findById(eventId);
 
-  if (user.bookings.includes(eventId)) {
-      user.bookings = user.bookings.filter(id => id.toString() !== eventId);
-      event.attendees = event.attendees.filter(id => id.toString() !== userId);
-      event.availableSeats += 1;
+    // Check if the user has booked the event
+    if (!user.bookings.includes(eventId)) {
+      return res.status(400).send(false); // User hasn't booked this event
+    }
 
-      await user.save();
-      await event.save();
+    // Remove user's booking from user's bookings array
+    user.bookings.pull(eventId);
 
-      res.status(200).send(true);
-  } else {
-      res.status(400).send(false);
+    // Remove user's ID from event's attendees array
+    event.attendees.pull(userId);
+
+    // Update available seats count
+    event.availableSeats++;
+
+    // Save changes to the database
+    await user.save();
+    await event.save();
+
+    // Send success response
+    res.status(200).send(true);
+  } catch (error) {
+    console.error("Error cancelling booking:", error);
+    res.status(500).send(false); // Internal server error
   }
 };
 
+
 const deleteEvent = async (req, res) => {
-    try {
-        const  event = await Event.findById(req.params.id);
-  
-        if (!event) {
-            return res.status(404).send('Not found');
-        }
-  
-        const filePath = path.join(__dirname, '../../../mereke/public', event.image);
-        console.log('Deleting file at path:', filePath);
-  
-        if (fs.existsSync(filePath)) {
-            fs.unlinkSync(filePath);
-        }
-  
-        await Event.findByIdAndDelete(req.params.id);
-  
-        res.status(200).send('ok');
-    } catch (error) {
-        console.error('Error deleting event:', error);
-        res.status(500).send('Internal Server Error');
+  try {
+    const event = await Event.findById(req.params.id);
+
+    if (!event) {
+      return res.status(404).send("Not found");
     }
-  };
+
+    const filePath = path.join(
+      __dirname,
+      "../../../mereke/public",
+      event.image
+    );
+    console.log("Deleting file at path:", filePath);
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    await Event.findByIdAndDelete(req.params.id);
+
+    res.status(200).send("ok");
+  } catch (error) {
+    console.error("Error deleting event:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 module.exports = {
   createEvent,
   bookEvent,
   cancelBooking,
   editEvent,
-  deleteEvent
+  deleteEvent,
 };

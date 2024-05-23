@@ -1,0 +1,64 @@
+
+  .main-book{
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    justify-content: space-between;
+    width: 80%;
+  }
+  .main-book-data{
+    width: 20%;
+  }
+  .main-book-calendar{
+    width: 80%;
+    
+  }
+  #calendar{
+    height: 600px;
+  }
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  p {
+    margin: 5px 0;
+  }
+  
+  button {
+    background-color: #ff1111;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  .booking-detail img{
+    width: 20px;
+    height: 20px;
+  }
+  .booking-detail{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }

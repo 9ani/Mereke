@@ -1,7 +1,7 @@
 <header>
-    <div class="logo"><a href="/">Decode Blog</a></div>
+    <div class="logo"><a href="/">MEREKE</a></div>
     <form class="head-search">
-        <input type="text" id="blogSearchInput" name="search" placeholder="Поиск по блогам">
+        <input type="text" id="blogSearchInput" name="search" placeholder="Поиск по мероприятиям">
         <button >
             <i class="fa-solid fa-magnifying-glass"></i>
             Найти
@@ -10,21 +10,20 @@
         <% if (user._id && !user.isAdmin) { %>
             <div class="auth_buttons">
 
-            <a href="/profile/<%= user._id  %>">profile</a>
-            <a href="/bookings">My Bookings</a>
-            <a href="/api/signout" >Logout</a></div>
+            <a href="/bookings">Mои бронирования</a>
+            <a href="/api/signout" >Выход</a></div>
 
             </div>
         <% } else if (user._id && user.isAdmin) { %>
             <div class="auth_buttons">
-            <a href="/admin/<%= user._id  %>">Profile</a>
-            <a href="/api/signout">Logout</a>
+            <a href="/admin/<%= user._id  %>">Админ-профиль</a>
+            <a href="/api/signout">Выход</a>
             </div>
         <% } else { %>
             <div class="auth_buttons">
 
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
+            <a href="/register">Регистрация</a>
+            <a href="/login">Вход</a>
             </div>
         <% } %>
 

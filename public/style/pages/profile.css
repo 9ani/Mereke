@@ -7,7 +7,7 @@
     font-weight: 500;
     line-height: 46px; 
     border-radius: 0px 4px 4px 0px;
-    background: #00A2DC;
+    background: #ff1111;
     border: none;
     align-items: center;
     justify-content: center;
@@ -34,7 +34,7 @@
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    width: 100%;
+    max-width: 100%;
 }
 
 .card-left {
@@ -53,6 +53,12 @@
 .event-info {
     display: flex;
     flex-direction: column;
+    max-width: 100%;
+    justify-content: center;
+    align-items: start;
+    text-align: left;
+    
+
 }
 
 .event-info a {
@@ -81,7 +87,7 @@
     margin: 5px 0;
     padding: 10px 15px;
     text-decoration: none;
-    background-color: #007bff;
+    background-color: #ff1111;
     color: #fff;
     border-radius: 5px;
     text-align: center;
@@ -90,4 +96,63 @@
 
 .event-btns a:hover {
     background-color: #0056b3;
+}
+.profile{
+    display: flex;
+    gap: 50px;
+}
+.profile-img img{
+    width: 70px;
+    height: 70px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-info p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.profile-info span {
+    font-weight: bold;
+}
+
+.add-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-family: Roboto;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.add-btn:hover {
+    background-color: #45a049;
+}
+
+#prof_title{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin: 30px 0;
 }

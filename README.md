@@ -2,26 +2,24 @@
 
 Для установки и запуска приложения выполните следующие шаги:
 
-
-
 2. Клонирование репозитория с GitHub:
 
-    ```bash
-    git clone https://github.com/9ani/Mereke.git
-    cd Mereke
-    ```
+   ```bash
+   git clone https://github.com/9ani/Mereke.git
+   cd Mereke
+   ```
 
 3. Установка зависимостей:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 4. Запуск приложения:
 
-    ```bash
-    npm start
-    ```
+   ```bash
+   npm start
+   ```
 
 Для дополнительной информации посетите репозиторий проекта на [GitHub](https://github.com/9ani/Mereke).
 
@@ -35,7 +33,7 @@
 
 ### Frontend
 
-В качестве фронтенд-технологий были использованы HTML, CSS и JavaScript, а также фреймворк React для построения пользовательского интерфейса.
+В качестве фронтенд-технологий были использованы HTML, CSS и JavaScript, а также EJS для построения пользовательского интерфейса.
 
 ### Backend
 
@@ -63,10 +61,10 @@
 - Изменение существующих мероприятий.
 - Удаление мероприятий.
 
-
 ## Скриншоты
 
 ### Скриншот главной страницы
+
 <img src="./public/images/screenshots/image.png" width="100%">
 ### Детальной страницы
 <img src="./public/images/screenshots/details.jpg" width="100%">
@@ -74,8 +72,9 @@
 <img src="./public/images/screenshots/admin.jpg" width="100%">
 
 ### Скриншот добавления мероприятий
+
 <img src="./public/images/screenshots/new.jpg" width="100%">
 
 ### Скриншот страницы брони пользователя
-<img src="./public/images/screenshots/prof.jpg" width="100%">
 
+<img src="./public/images/screenshots/prof.jpg" width="100%">

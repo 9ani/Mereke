@@ -1,4 +1,4 @@
-![image](https://github.com/9ani/Mereke/assets/123793591/5cb179ec-20c3-4e0c-b8dc-b13b7589b88f)## Установка
+## Установка
 
 Для установки и запуска приложения выполните следующие шаги:
 
@@ -20,6 +20,10 @@
    ```bash
    npm start
    ```
+
+## Данные Админа
+- Admin username: master@mail.ru
+- Admin password: 1
 
 Для дополнительной информации посетите репозиторий проекта на [GitHub](https://github.com/9ani/Mereke).
 

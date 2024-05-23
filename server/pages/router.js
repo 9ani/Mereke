@@ -104,6 +104,15 @@ router.get('/detail/:id', async(req, res)=>{
   const event = await Event.findById(req.params.id).populate('category')
   res.render("detail", {user: req.user ? req.user : {}, event: event, rates: rates, averageRate: (averageRate / rates.length).toFixed(1)})
 })
-
+router.get('/bookings', async (req, res) => {
+ 
+  try {
+      const user = await User.findById(req.user._id).populate('bookings');
+      res.render('bookings', { user });
+  } catch (err) {
+      console.error(err);
+      res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;

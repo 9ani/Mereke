@@ -138,6 +138,27 @@ const editEvent = async (req, res) => {
   }
 };
 
+// const bookEvent = async (req, res) => {
+//   try {
+//     const eventId = req.body.eventId;
+//     const event = await Event.findById(eventId);
+//     if (!event) {
+//         return res.status(404).send('Event not found');
+//     }
+//     if (event.availableSeats <= 0) {
+//         return res.status(400).send('No available seats');
+//     }
+//     event.attendees.push(req.user._id);
+//     event.availableSeats--;
+//     await event.save();
+//     req.user.bookings.push(eventId);
+//     await req.user.save();
+//     res.status(200).send('Event booked successfully');
+// } catch (error) {
+//     console.error('Error booking event:', error);
+//     res.status(500).send('Internal server error');
+// }
+// };
 const bookEvent = async (req, res) => {
   try {
     const eventId = req.body.eventId;
@@ -153,48 +174,44 @@ const bookEvent = async (req, res) => {
     await event.save();
     req.user.bookings.push(eventId);
     await req.user.save();
-    res.status(200).send('Event booked successfully');
-} catch (error) {
+    
+    res.status(200).send({
+      _id: event._id,
+      title: event.title,
+      description: event.description,
+      time: event.time,
+      date: event.date,
+      location: event.location,
+      availableSeats: event.availableSeats,
+      category: event.category,
+      image: event.image,
+      attendees: event.attendees,
+      __v: event.__v
+    });
+  } catch (error) {
     console.error('Error booking event:', error);
     res.status(500).send('Internal server error');
-}
+  }
 };
+
 const cancelBooking = async (req, res) => {
-  try {
-    const userId = req.user && req.user._id;
-    const eventId = req.body.id;
+  const userId = req.user._id;
+  const eventId = req.body.bookingId;
 
-    if (!userId || !eventId) {
-      return res.status(400).send("Invalid request");
-    }
+  const user = await User.findById(userId);
+  const event = await Event.findById(eventId);
 
-    const user = await User.findById(userId);
-    const event = await Event.findById(eventId);
+  if (user.bookings.includes(eventId)) {
+      user.bookings = user.bookings.filter(id => id.toString() !== eventId);
+      event.attendees = event.attendees.filter(id => id.toString() !== userId);
+      event.availableSeats += 1;
 
-    if (!user || !event) {
-      return res.status(404).send("User or event not found");
-    }
+      await user.save();
+      await event.save();
 
-    // const isEventBooked = user.registeredEvents.includes(eventId);
-    // if (!isEventBooked) {
-    //     return res.status(400).send('Вы не зарегистрированы на это событие');
-    // }
-
-    event.attendees = event.attendees.filter(
-      (attendee) => !attendee.equals(userId)
-    );
-    event.availableSeats += 1;
-    await event.save();
-
-    user.registeredEvents = user.registeredEvents.filter(
-      (event) => !event.equals(eventId)
-    );
-    await user.save();
-
-    res.send("Бронирование успешно отменено");
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Ошибка сервера");
+      res.status(200).send(true);
+  } else {
+      res.status(400).send(false);
   }
 };
 

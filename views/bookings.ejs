@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.css" />
+</head>
+<body>
+    <%- include('./partials/header.ejs') %>
+    <div class="container">
+        <div class="main">
+            <h1>My Bookings</h1>
+            <% if (user.bookings && user.bookings.length > 0) { %>
+                <ul>
+                    <% user.bookings.forEach(booking => { %>
+                        <li>
+                            <h2><%= booking.title %></h2>
+                            <p>Date: <%= booking.date.toDateString() %></p>
+                            <p>Time: <%= booking.time %></p>
+                            <p>Location: <%= booking.location %></p>
+                            <button onclick="deleteBooking('<%= booking._id %>')">Delete Booking</button>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p>You do not have any bookings.</p>
+            <% } %>
+        </div>
+    </div>
+    <div id="calendar" style="height: 600px;"></div>
+    <%- include("partials/scripts.ejs") %>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://uicdn.toast.com/calendar/latest/toastui-calendar.min.js"></script>
+    <input type="hidden" id="bookingsData" value='<%= JSON.stringify(user.bookings || []) %>' />
+    <script src="/js/bookEvent.js"></script>
+</body>
+</html>
